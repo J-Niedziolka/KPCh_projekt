@@ -1,0 +1,77 @@
+@* @model IEnumerable<MvcTicket.Models.Ticket> *@
+@model MvcTicket.Models.TicketTypeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Tickets" asp-action="Index" method="get">
+    <p>
+        <select asp-for="TicketType" asp-items="Model.Types">
+        <option value="">All</option>
+        </select>
+
+        Wyszukaj po ID: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].ExpirationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].TicketType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].IfDiscount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tickets![0].IfZone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tickets!) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IfDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IfZone)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
